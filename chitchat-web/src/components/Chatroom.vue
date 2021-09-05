@@ -48,7 +48,7 @@ export default {
       if (this.stompClient && this.stompClient.connected) {
         const msg = { content: this.newMessage //, userName userId sendDate
         };
-        this.stompClient.send("/app/hello", JSON.stringify(msg), {});
+        this.stompClient.send("/app/message", JSON.stringify(msg), {});
       }
     },
 
@@ -61,7 +61,7 @@ export default {
         frame => {
           this.connected = true;
           console.log(frame);
-          this.stompClient.subscribe("/topic/greetings", tick => {
+          this.stompClient.subscribe("/topic/messages", tick => {
             console.log(tick);
             this.messages.push(JSON.parse(tick.body));
           });

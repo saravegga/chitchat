@@ -14,17 +14,21 @@ public class MessageWebSocketController {
 
   @Autowired private ChatRoomService chatRoomService;
 
-  @MessageMapping("/chat/abc")
+  @MessageMapping("/message")
   //@MessageMapping("/chat/{sourceUrl}")
-  @SendTo("/topic/abc")
+  @SendTo("/topic/messages")
   //@SendTo("/topic/{sourceUrl}")
-  public MessageDTO greeting(/*@DestinationVariable String sourceUrl,*/ MessageDTO messageDto)
-      throws Exception {
-
-    //Thread.sleep(1000); // simulated delay
+  public MessageDTO chatting(/*@DestinationVariable String sourceUrl,*/ MessageDTO message) {
 
     MessageDTO chatMessageDTO = new MessageDTO();
-    chatMessageDTO.setContent("Hello, " + HtmlUtils.htmlEscape(messageDto.getUserName()) + "!");
+    chatMessageDTO.setContent("Hello, " + message.getContent() + "!");
+
+    //call db to save msg
+    //front needs to send user
+    //front needs to firstly call endpoint to get/save chatroom
+    //this endpoint will receive the sourceUrl param
+
+    //front needs to look like a chatroom :)
 
     return chatMessageDTO;
   }
